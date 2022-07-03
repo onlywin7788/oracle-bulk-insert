@@ -1,0 +1,45 @@
+<!--
+CREATE SEQUENCE emp_seq
+       INCREMENT BY 1
+       START WITH 1
+       MINVALUE 1
+       MAXVALUE 99999999
+       NOCYCLE
+       NOCACHE
+       NOORDER;
+
+CREATE TABLE MSTR_DUMMY_TB
+(
+	ID INT PRIMARY KEY,
+	COL1 VARCHAR2(1024),
+	COL2 VARCHAR2(1024),
+	COL3 VARCHAR2(1024),
+	COL4 VARCHAR2(1024)
+)
+-->
+
+
+<config>
+	<common>
+		<insert total_count="2000" commit_count="100"/>
+	</common>
+	<database 
+		conn="jdbc:oracle:thin:@10.10.19.227:1521:MSTRTTA" 
+		id="MSTR_WH" 
+		pass="MSTR_WH">
+	</database>
+	<data>
+		<SQL>
+			INSERT INTO MSTR_DUMMY_TB (ID, COL1, COL2, COL3, COL4)
+			VALUES (DUMMY_SEQ.NEXTVAL, ?, ?, ?, ?)
+		</SQL>
+		<params>
+			<param length="100" value="A"/>
+			<param length="100" value="B"/>
+			<param length="100" value="C"/>
+			<param length="100" value="D"/>
+		</params>
+	</data>
+</config>
+
+
